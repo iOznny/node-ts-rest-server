@@ -3,6 +3,7 @@ import cors from "cors";
 
 // Routes
 import UserRoute from "../routes/user";
+import db from "../db/connection";
 
 class Server {
 
@@ -16,14 +17,26 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || '8000';
         
-        // Inicializar middlewares.
+        // Inicializar base de datos
+        this.dbConn();
+
+        // Inicializar middlewares
         this.middlewares();
 
-        // Inicializar routes.
+        // Inicializar routes
         this.routes();
     }
 
     // Conexión a la Base de Datos
+    async dbConn() {
+        try {
+            await db.authenticate();
+            console.log('Db Online');
+            
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 
     // Middlewares
     middlewares() {
