@@ -12,7 +12,7 @@ class Server {
     // levantar el servidor.
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Servidor corriendo en puerto ' + this.port);
+            console.log('Servidor corriendo en puerto' + this.port);
         });
     }
 }
